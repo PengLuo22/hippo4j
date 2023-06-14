@@ -55,7 +55,6 @@ public class BaseThreadDetailStateHandler implements ThreadDetailState {
         try {
             // 通过反射拿到线程池的 workers属性 private final HashSet<Worker> workers = new HashSet<>();
             HashSet<Object> workers = (HashSet<Object>) ReflectUtil.getFieldValue(threadPoolExecutor, workersName);
-            HashSet<Object> workers = (HashSet<Object>) ReflectUtil.getFieldValue(threadPoolExecutor, WORKERS);
             if (CollectionUtil.isEmpty(workers)) {
                 return resultThreadStates;
             }
@@ -64,7 +63,6 @@ public class BaseThreadDetailStateHandler implements ThreadDetailState {
                 try {
                     // Work对象里thread属性拿到 Thread 信息
                     thread = (Thread) ReflectUtil.getFieldValue(worker, threadName);
-                    thread = (Thread) ReflectUtil.getFieldValue(worker, THREAD);
                     if (thread == null) {
                         log.warn("Reflection get worker thread is null. Worker: {}", worker);
                         continue;
